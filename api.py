@@ -8,6 +8,9 @@ the email adress, first name and last name in a json object as a value
 '''
 database = {}
 
+id_counter = 0
+email_list = {}
+
 
 @app.route('/personnel', methods=['GET', 'DELETE', 'POST'])
 def programming_languages_route():
@@ -26,6 +29,7 @@ def list_all_personnel():
 
 
 def delete_personnel():
+
     return
 
 
@@ -50,6 +54,7 @@ data:
 
 
 def create_new_personnel(json_object_data):
+    global id_counter
     mail = ""
     first_name = ""
     last_name = ""
@@ -60,8 +65,11 @@ def create_new_personnel(json_object_data):
     except:
         return "Invalid input data, wrong format", status.HTTP_400_BAD_REQUEST
 
-    if database.get(mail) == None:
-        database[mail] = {"email": mail,
-                          "first_name": first_name, "last_name": last_name}
-        return str(database[mail]), status.HTTP_201_CREATED
+    if email_list.get(mail) == None:
+        database[id_counter] = {"id": id_counter, "email": mail,
+                                "first_name": first_name, "last_name": last_name}
+        email_list[mail] = True
+        id_counter += 1
+
+        return str(database[id_counter-1]), status.HTTP_201_CREATED
     return "Email adress already exists", status.HTTP_409_CONFLICT
