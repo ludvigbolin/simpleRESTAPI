@@ -33,8 +33,16 @@ delete_personnel takes an id as parameter and deleted that entry from the databa
 
 Status codes:
 202, successful deletion and returns the deleted entry from the database.
+    content: {
+        "email": "example@mail.com",
+        "first_name": "example",
+        "id": 0,
+        "last_name": "examplesson"
+    }
+
 400, invalid formatting of parameter, should be a integer but is not.
-409, the id requested is not available in the database.
+
+404, the id requested is not available in the database.
 
 Can be called using:
 [DELETE] /personnel/<input_id>
@@ -63,6 +71,14 @@ list_all_personnel returns all entries in the database
 
 Status codes:
 200, successful and returns all entries in the database
+    content: {
+        "personnel": [{
+            "email": "example@mail.com",
+            "first_name": "example",
+            "id": 0,
+            "last_name": "examplesson"
+        }, ...]
+    }
 
 Can be called using:
 [GET] /personnel 
@@ -78,7 +94,15 @@ create_new_personnel takes a json object and if correctly comfigured, adds that 
 
 Status codes:
 201, successful and returns the added entry in the database
+    content: {
+        "email": "example@mail.com",
+        "first_name": "example",
+        "id": 0,
+        "last_name": "examplesson"
+    }
+
 400, invalid formatting of json object in data field
+
 409, entry already exists and cannot be added again to database
 
 Can be called using:
@@ -111,11 +135,15 @@ def create_new_personnel(json_object_data):
         email_list[mail] = True
         id_counter += 1
 
-        return str(database[id_counter-1]), status.HTTP_201_CREATED
+        return database[id_counter-1], status.HTTP_201_CREATED
     return "Email adress already exists.", status.HTTP_409_CONFLICT
 
 
 '''
+Run the API request by running the following commands in terminal
+
 export FLASK_APP=api.py
 python3 -m flask run
+
+Do the calls on the server provided by Flask
 '''
