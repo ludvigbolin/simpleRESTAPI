@@ -3,17 +3,21 @@ from flask_api import status
 app = Flask(__name__)
 
 '''
-Items in the database are stored with the email adress as the key and 
-the email adress, first name and last name in a json object as a value
+Items in the database are stored with the id as the key and 
+the id, email adress, first name and last name in a json object as a value.
 '''
 database = {}
 
 id_counter = 0
 email_list = {}
 
+'''
+Function for redirecting calls to correct function, further explaination of each function below.
+'''
+
 
 @app.route('/v0/personnel', methods=['GET', 'DELETE', 'POST'])
-def programming_languages_route():
+def personnel_route():
     if request.method == 'GET':
         return list_all_personnel()
     elif request.method == "POST":
@@ -27,7 +31,7 @@ def programming_languages_route():
 
 
 '''
-delete_personnel takes an id as parameter and deleted that entry from the database. The deleted entry is returned.
+delete_personnel takes an id as parameter and deletes that entry from the database. The deleted entry is returned.
 
 Status codes:
 202, successful deletion and returns the deleted entry from the database.
@@ -65,10 +69,10 @@ def delete_personnel(input_id):
 
 
 '''
-list_all_personnel returns all entries in the database
+list_all_personnel returns all entries in the database.
 
 Status codes:
-200, successful and returns all entries in the database
+200, successful and returns all entries in the database.
     content: {
         "personnel": [{
             "email": "example@mail.com",
@@ -88,10 +92,10 @@ def list_all_personnel():
 
 
 '''
-create_new_personnel takes a json object and if correctly comfigured, adds that co-worker to the database
+create_new_personnel takes a json object and if correctly comfigured, adds that co-worker to the database.
 
 Status codes:
-201, successful and returns the added entry in the database
+201, successful and returns the added entry in the database.
     content: {
         "email": "example@mail.com",
         "first_name": "example",
@@ -99,9 +103,9 @@ Status codes:
         "last_name": "examplesson"
     }
 
-400, invalid formatting of json object in data field
+400, invalid formatting of json object in data field.
 
-409, entry already exists and cannot be added again to database
+409, entry already exists and cannot be added again to database.
 
 Can be called using:
 [POST] /v0/personnel 
@@ -137,10 +141,10 @@ def create_new_personnel(json_object_data):
 
 
 '''
-Run the API request by running the following commands in terminal
+Run the API request by running the following commands in terminal:
 
 export FLASK_APP=api.py
 python3 -m flask run
 
-Do the calls on the server provided by Flask
+Do the calls on the server provided by Flask.
 '''
