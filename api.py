@@ -105,12 +105,11 @@ Status codes:
 
 Can be called using:
 [POST] /v0/personnel 
-data: 
-{
-   "email": "example@mail.com"
-   "first_name": "example"
+data: {
+   "email": "example@mail.com",
+   "first_name": "example",
    "last_name": "examplesson"
-}
+    }
 
 '''
 
