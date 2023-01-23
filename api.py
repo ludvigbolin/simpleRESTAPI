@@ -6,9 +6,7 @@ app = Flask(__name__)
 Items in the database are stored with the email adress as the key and 
 the email adress, first name and last name in a json object as a value
 '''
-database = {
-    -1: {"id": -1, "email": "example@mail.com", "first_name": "example", "last_name": "examplesson"}
-}
+database = {}
 
 id_counter = 0
 email_list = {}
