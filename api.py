@@ -12,7 +12,7 @@ id_counter = 0
 email_list = {}
 
 
-@app.route('/personnel', methods=['GET', 'DELETE', 'POST'])
+@app.route('/v0/personnel', methods=['GET', 'DELETE', 'POST'])
 def programming_languages_route():
     if request.method == 'GET':
         return list_all_personnel()
@@ -43,13 +43,13 @@ Status codes:
 404, the id requested is not available in the database.
 
 Can be called using:
-[DELETE] /personnel/<input_id>
+[DELETE] /v0/personnel/<input_id>
 <input_id> must be a integer and an id available in the database.
 
 '''
 
 
-@app.delete('/personnel/<input_id>')
+@app.delete('/v0/personnel/<input_id>')
 def delete_personnel(input_id):
     try:
         input_id_integer = int(input_id)
@@ -79,7 +79,7 @@ Status codes:
     }
 
 Can be called using:
-[GET] /personnel 
+[GET] /v0/personnel 
 '''
 
 
@@ -104,7 +104,7 @@ Status codes:
 409, entry already exists and cannot be added again to database
 
 Can be called using:
-[POST] /personnel 
+[POST] /v0/personnel 
 data: 
 {
    "email": "example@mail.com"
