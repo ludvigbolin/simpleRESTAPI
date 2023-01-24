@@ -14,7 +14,8 @@ def test_create_new_personnel_invalid_data_format():
     json_data["not_last_name"] = "not_last_name"
     return_value = api.create_new_personnel(json_data)
 
-    assert return_value[1] == 400
+    assert return_value[1] == 400, "test_create_new_personnel_invalid_data_format failed. Should return 400 but did return " + \
+        str(return_value[1]) + "."
 
 
 def test_create_new_personnel_existing_email():
@@ -32,7 +33,8 @@ def test_create_new_personnel_existing_email():
                  "first_name": "example2", "last_name": "examplesson2"}
     return_value = api.create_new_personnel(json_data)
 
-    assert return_value[1] == 409
+    assert return_value[1] == 409, "test_create_new_personnel_existing_email failed. Should return 409 but did return " + \
+        str(return_value[1]) + "."
 
 
 def test_create_new_personnel_successful_new_user():
@@ -44,7 +46,8 @@ def test_create_new_personnel_successful_new_user():
                  "first_name": "example2", "last_name": "examplesson2"}
     return_value = api.create_new_personnel(json_data)
 
-    assert return_value[0]["id"] == 0 and return_value[1] == 201
+    assert return_value[0]["id"] == 0 and return_value[1] == 201, "test_create_new_personnel_successful_new_user failed. Should return id 0 and status code 201 but did return " + \
+        str(return_value[0]["id"]) + " and " + str(return_value[1]) + "."
 
 
 def test_delete_new_personnel_user_not_found():
@@ -53,7 +56,8 @@ def test_delete_new_personnel_user_not_found():
     api.id_counter = 0
 
     return_value = api.delete_personnel(10)
-    assert return_value[1] == 404
+    assert return_value[1] == 404, "test_delete_new_personnel_user_not_found failed. Should return 404 but did return " + \
+        str(return_value[1]) + "."
 
 
 def test_delete_new_personnel_user_invalid_format():
@@ -62,7 +66,8 @@ def test_delete_new_personnel_user_invalid_format():
     api.id_counter = 0
 
     return_value = api.delete_personnel("not a integer")
-    assert return_value[1] == 400
+    assert return_value[1] == 400, "test_delete_new_personnel_user_invalid_formatfailed. Should return 400 but did return " + \
+        str(return_value[1]) + "."
 
 
 def test_delete_new_personnel_user_valid_deletion():
@@ -79,7 +84,8 @@ def test_delete_new_personnel_user_valid_deletion():
     api.id_counter = 1
 
     return_value = api.delete_personnel(0)
-    assert return_value[0]["id"] == 0 and return_value[1] == 202
+    assert return_value[0]["id"] == 0 and return_value[1] == 202, "test_delete_new_personnel_user_valid_deletion failed. Should return id 0 and status code 202 but did return " + \
+        str(return_value[0]["id"]) + " and " + str(return_value[1]) + "."
 
 
 def test_list_all_personnel_empty_database():
@@ -88,7 +94,9 @@ def test_list_all_personnel_empty_database():
     api.id_counter = 0
 
     return_value = api.list_all_personnel()
-    assert len(return_value[0]["personnel"]) == 0 and return_value[1] == 200
+    assert len(return_value[0]["personnel"]) == 0 and return_value[1] == 200, "test_list_all_personnel_empty_database failed. Should return length 0 and status code 200 but did return " + \
+        str(len(return_value[0]["personnel"])) + \
+        " and " + str(return_value[1]) + "."
 
 
 def test_list_all_personnel_non_empty_database():
@@ -109,7 +117,9 @@ def test_list_all_personnel_non_empty_database():
     api.id_counter = 2
 
     return_value = api.list_all_personnel()
-    assert len(return_value[0]["personnel"]) == 2 and return_value[1] == 200
+    assert len(return_value[0]["personnel"]) == 2 and return_value[1] == 200, "test_list_all_personnel_non_empty_database failed. Should return length 2 and status code 200 but did return " + \
+        str(len(return_value[0]["personnel"])) + \
+        " and " + str(return_value[1]) + "."
 
 
 test_create_new_personnel_invalid_data_format()
